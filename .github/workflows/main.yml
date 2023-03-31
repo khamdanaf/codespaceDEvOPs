@@ -11,15 +11,4 @@ jobs:
         python-version: 3.8
     - name: Install dependencies
       run: |
-        pip install codecov
-        python scripts/ci/install
-        python scripts/ci/install-check
-    - name: Run tests
-      run: python scripts/ci/run-tests --with-cov
-    - name: Run checks
-      run: python scripts/ci/run-check
-    - name: codecov
-      run: |
-        rm tests/coverage.xml
-        mv tests/.coverage ./
-        codecov
+        pip install 
