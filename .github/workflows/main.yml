@@ -1,22 +1,37 @@
-name: codespace
-on: [push]
+name: Run tests
+
+on:
+  push:
+  pull_request:
+    branches-ignore: [ master ]
+
 jobs:
   build:
-    runs-on: ubuntu-latest
+
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        python-version: ["3.7", "3.8", "3.9", "3.10", "3.11"]
+        os: [ubuntu-latest, macOS-latest, windows-latest]
+
     steps:
-    - uses: actions/checkout@v2
-    - name: Set up Python 3.8
-      uses: actions/setup-python@v1
+    - uses: actions/checkout@v3
+    - name: Set up Python ${{ matrix.python-version }}
+      uses: actions/setup-python@v4
       with:
-        python-version: 3.8
+        python-version: ${{ matrix.python-version }}
     - name: Install dependencies
       run: |
-        make install
-    - name: Lint
+        pip install codecov
+        python scripts/ci/install
+        python scripts/ci/install-check
+    - name: Run tests
+      run: python scripts/ci/run-tests --with-cov
+    - name: Run checks
+      run: python scripts/ci/run-check
+    - name: codecov
       run: |
-        make lint
-    - name: Test
-      run: |
-        make test
-
-
+        rm tests/coverage.xml
+        mv tests/.coverage ./
+        codecov
