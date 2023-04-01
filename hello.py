@@ -1,6 +1,3 @@
-def hi():
-  return "hi"
-
 #!/usr/bin/env python
 import click
 import glob
