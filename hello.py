@@ -2,20 +2,29 @@ def hi():
   return "hi"
 
 #!/usr/bin/env python
-
 import click
+import glob
+
+# this is bad code intentionally
+# varbad=
 
 
 @click.command()
-@click.option("--name", help="Place the name you want to YELL")
-def marco(name):
-    """This is a Marco/Polo game."""
-
-    if name == "Marco":
-        click.echo("Polo")
-    else:
-        click.echo("No!")
+@click.option(
+    "--path",
+    prompt="Path to search for csv files",
+    help="This is the path to search for files: /tmp",
+)
+@click.option(
+    "--ftype", prompt="Pass in the type of file", help="Pass in the file type:  i.e csv"
+)
+def search(path, ftype):
+    results = glob.glob(f"{path}/*.{ftype}")
+    click.echo(click.style("Found Matches:", fg="red"))
+    for result in results:
+        click.echo(click.style(f"{result}", bg="blue", fg="white"))
 
 
 if __name__ == "__main__":
-    marco()
+    # pylint: disable=no-value-for-parameter
+    search()
