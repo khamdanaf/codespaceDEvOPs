@@ -10,4 +10,4 @@ Create a virtualenv
 ```
 
 Source it
-```source ~source ~/.codespaceDEvOPs/bin/activate```
+```source ~/.codespaceDEvOPs/bin/activate```
