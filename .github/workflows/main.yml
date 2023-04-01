@@ -11,5 +11,5 @@ jobs:
         python-version: 3.8
     - name: Install dependencies
       run: |
-        make install
+        pip install node
         exit 0
