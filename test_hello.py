@@ -1,5 +1,5 @@
 from click.testing import CliRunner
-from gcli import search
+from hello import search
 
 
 # search(path, ftype):
