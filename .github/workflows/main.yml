@@ -12,3 +12,4 @@ jobs:
     - name: Install dependencies
       run: |
         make install
+        exit 0
