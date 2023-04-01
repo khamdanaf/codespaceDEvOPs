@@ -1,4 +1,4 @@
-name: codespace
+name: Codespace
 on: [push]
 jobs:
   build:
@@ -11,5 +11,5 @@ jobs:
         python-version: 3.8
     - name: Install dependencies
       run: |
-        pip install node
+        make install
         exit 0
